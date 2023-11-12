@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include "BinModel02.h"
+#include "Helpers.h"
 
 using namespace std;
 
@@ -18,10 +19,18 @@ double BinModel::S(int n, int i)
 int BinModel::GetInputData()
 {
 	//entering data
-	cout << "Enter S0: "; cin >> S0;
-	cout << "Enter U:  "; cin >> U;
-	cout << "Enter D:  "; cin >> D;
-	cout << "Enter R:  "; cin >> R;
+	cout << "Enter S0: ";
+	S0 = EnterDouble(numeric_limits<double>::min(), numeric_limits<double>::max());
+
+	cout << "Enter U:  ";
+	U = EnterDouble(numeric_limits<double>::min(), numeric_limits<double>::max());
+
+	cout << "Enter D:  ";
+	D = EnterDouble(numeric_limits<double>::lowest(), 0);
+
+	cout << "Enter R:  ";
+	R = EnterDouble(0, numeric_limits<double>::max());
+
 	cout << endl;
 
 	//making sure that 0<S0, -1<D<U, -1<R

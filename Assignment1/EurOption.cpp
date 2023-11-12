@@ -2,6 +2,7 @@
 #include <vector>
 #include <cmath>
 #include "EurOption.h"
+#include "Helpers.h"
 
 using namespace std;
 
@@ -55,8 +56,6 @@ void EurOption::Compute(BinModel model, int n, int i)
 
 void EurOption::OutputData(int optionIndex)
 {
-	//cout << "Option " << optionIndex << " price is " << price << "; replicating strategy: x = " << replicationX
-	//	<< ", y = " << replicationY << endl;
 	cout << "Option " << optionIndex << " price is " << price;
 	
 	if (computedN < N)
@@ -100,10 +99,14 @@ double EurOption::ComputeReplicationY(BinModel model, int n, int i)
 int Call::GetInputData()
 {
 	cout << "Enter call option data:" << endl;
-	int N;
-	cout << "Enter steps to expiry N: "; cin >> N;
+
+	cout << "Enter steps to expiry N: ";
+	int N = EnterInt(1, 5000);
 	SetN(N);
-	cout << "Enter strike price K:    "; cin >> K;
+
+	cout << "Enter strike price K:    ";
+	K = EnterDouble(numeric_limits<double>::min(), numeric_limits<double>::max());
+	
 	cout << endl;
 	return 0;
 }
@@ -117,10 +120,14 @@ double Call::Payoff(double z)
 int Put::GetInputData()
 {
 	cout << "Enter put option data:" << endl;
-	int N;
-	cout << "Enter steps to expiry N: "; cin >> N;
+
+	cout << "Enter steps to expiry N: ";
+	int N = EnterInt(1, 5000);
 	SetN(N);
-	cout << "Enter strike price K:    "; cin >> K;
+
+	cout << "Enter strike price K:    ";
+	K = EnterDouble(numeric_limits<double>::min(), numeric_limits<double>::max());
+
 	cout << endl;
 	return 0;
 }

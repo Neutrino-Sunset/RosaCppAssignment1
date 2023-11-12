@@ -20,6 +20,8 @@ public:
 
 	void OutputOptions();
 
+	int GetMinN();
+
 private:
 	void AddCall();
 	void AddPut();

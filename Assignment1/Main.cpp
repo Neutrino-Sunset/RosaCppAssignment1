@@ -23,7 +23,6 @@ int EnterScenario()
 
 	if (binModel.GetInputData() == 1)
 	{
-		PauseBeforeExit();
 		return 1;
 	}
 
@@ -32,7 +31,7 @@ int EnterScenario()
 	options.InputOptions();
 
 	int n, i;
-	InputNodeSelection(n, i);
+	InputNodeSelection(n, i, options.GetMinN());
 
 	options.ComputeOptions(binModel, n, i);
 	options.OutputOptions();

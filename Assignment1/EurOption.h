@@ -5,6 +5,7 @@
 class EurOption
 {
 public:
+	int GetN() { return N; }
 	void SetN(int N_) { N = N_; }
 
 	virtual double Payoff(double z) = 0;
