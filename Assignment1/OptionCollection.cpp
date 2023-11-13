@@ -26,32 +26,32 @@ void OptionCollection::InputOptions()
 		optionType = EnterOptionType();
 		if (optionType == "call")
 		{
-			AddCall();
+			InputCall();
 		}
 		else if (optionType == "put")
 		{
-			AddPut();
+			InputPut();
 		}
 
 		++i;
 	}
 }
 
-int OptionCollection::GetMinN()
+int OptionCollection::GetMaxN()
 {
-	int minN = numeric_limits<int>::max();
+	int maxN = 0;
 	for (int i = 0; i < options_.size(); ++i)
 	{
 		int n = options_[i]->GetN();
-		if (n < minN)
+		if (n > maxN)
 		{
-			minN = n;
+			maxN = n;
 		}
 	}
-	return minN;
+	return maxN;
 }
 
-void OptionCollection::AddCallOption(double k, int n)
+void OptionCollection::AddCall(double k, int n)
 {
 	Call* call = new Call();
 	call->SetK(k);
@@ -59,14 +59,22 @@ void OptionCollection::AddCallOption(double k, int n)
 	options_.push_back(call);
 }
 
-void OptionCollection::AddCall()
+void OptionCollection::AddPut(double k, int n)
+{
+	Put* put = new Put();
+	put->SetK(k);
+	put->SetN(n);
+	options_.push_back(put);
+}
+
+void OptionCollection::InputCall()
 {
 	Call* call = new Call();
 	call->GetInputData();
 	options_.push_back(call);
 }
 
-void OptionCollection::AddPut()
+void OptionCollection::InputPut()
 {
 	Put* put = new Put();
 	put->GetInputData();

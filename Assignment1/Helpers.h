@@ -13,3 +13,5 @@ double EnterDouble(double min, double max);
 std::string EnterOptionType();
 
 void PauseBeforeExit();
+
+bool RunAgainOrExit();

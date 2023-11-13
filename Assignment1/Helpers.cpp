@@ -12,7 +12,7 @@ void InputNodeSelection(int& n, int& i, int maxN)
 	n = EnterInt(0, maxN);
 
 	cout << "i = ";
-	i = EnterInt(0, maxN);
+	i = EnterInt(0, n);
 
 	cout << "\nAT NODE (n,i)=(" << n << "," << i << "):\n\n";
 }
@@ -66,4 +66,9 @@ void PauseBeforeExit()
 #endif
 }
 
-
+bool RunAgainOrExit()
+{
+	cout << "Press 'q' to exit or enter to run again\n\n";
+	int key = _getch();
+	return key != 'q';
+}

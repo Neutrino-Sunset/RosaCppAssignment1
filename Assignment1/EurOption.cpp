@@ -25,6 +25,10 @@ double EurOption::PriceByCRR(BinModel model, int n, int i)
 	{
 		return price[i];
 	}
+	else if (n > N)
+	{
+		return 0;
+	}
 
 	for (int nIndex = N - 1; nIndex >= 0; --nIndex)
 	{
@@ -47,25 +51,14 @@ void EurOption::Compute(BinModel model, int n, int i)
 	computedN = n;
 	price = PriceByCRR(model, n, i);
 
-	if (computedN < N)
-	{
-		replicationX = ComputeReplicationX(model, n, i);
-		replicationY = ComputeReplicationY(model, n, i);
-	}
+	replicationX = ComputeReplicationX(model, n, i);
+	replicationY = ComputeReplicationY(model, n, i);
 }
 
 void EurOption::OutputData(int optionIndex)
 {
 	cout << "Option " << optionIndex << " price is " << price;
-	
-	if (computedN < N)
-	{
-		cout << "; replicating strategy: x = " << replicationX << ", y = " << replicationY << endl;
-	}
-	else
-	{
-		cout << endl;
-	}
+	cout << "; replicating strategy: x = " << replicationX << ", y = " << replicationY << endl;
 }
 
 double EurOption::ComputeReplicationX(BinModel model, int n, int i)

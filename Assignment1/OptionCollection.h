@@ -11,20 +11,17 @@ public:
 	{}
 
 	void InputNumberOfOptions();
-
 	void InputOptions();
-
-	void AddCallOption(double k, int n);
-
 	void ComputeOptions(BinModel binModel, int n, int i);
-
 	void OutputOptions();
 
-	int GetMinN();
+	void AddCall(double k, int n);
+	void AddPut(double k, int n);
+	int GetMaxN();
 
 private:
-	void AddCall();
-	void AddPut();
+	void InputCall();
+	void InputPut();
 
 	std::vector<EurOption*> options_;
 	int numberOfOptions_;

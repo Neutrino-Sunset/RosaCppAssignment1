@@ -6,15 +6,27 @@
 using namespace std;
 
 
-int RunDefaultScenario()
+void RunScenario(string callOrPut, double s0, double u, double d, double r,
+	int n, double k, int node_n, int node_i)
 {
-	BinModel binModel(100, 0.1, -0.1, 0.05);
+	BinModel binModel(s0, u, d, r);
 	OptionCollection options;
-	options.AddCallOption(100, 4);
 
-	options.ComputeOptions(binModel, 3, 3);
+	if (callOrPut == "call")
+	{
+		options.AddCall(k, n);
+	}
+	else if (callOrPut == "put")
+	{
+		options.AddPut(k, n);
+	}
+	else
+	{
+		return;
+	}
+
+	options.ComputeOptions(binModel, node_n, node_i);
 	options.OutputOptions();
-	return 0;
 }
 
 int EnterScenario()
@@ -31,7 +43,7 @@ int EnterScenario()
 	options.InputOptions();
 
 	int n, i;
-	InputNodeSelection(n, i, options.GetMinN());
+	InputNodeSelection(n, i, options.GetMaxN());
 
 	options.ComputeOptions(binModel, n, i);
 	options.OutputOptions();
@@ -42,10 +54,19 @@ int EnterScenario()
 
 int main()
 {
-	int result;
-	//result = RunDefaultScenario();
-	result = EnterScenario();
+	int result = 0;
 
-	PauseBeforeExit();
+	do
+	{
+		//RunScenario("call", 100, 0.1, -0.1, 0.05, 4, 100, 3, 2);
+		/*RunScenario("put", 100, 0.1, -0.1, 0.05, 4, 90, 3, 0);
+		RunScenario("put", 100, 0.1, -0.1, 0.05, 4, 90, 3, 1);
+		RunScenario("put", 100, 0.1, -0.1, 0.05, 4, 90, 3, 2);
+		RunScenario("put", 100, 0.1, -0.1, 0.05, 4, 90, 3, 3);*/
+
+		//RunScenario("call", 100, 0.1, -0.1, 0.05, 4, 100, 6, 2);
+		result = EnterScenario();
+	} while (RunAgainOrExit());
+
 	return result;
 }
